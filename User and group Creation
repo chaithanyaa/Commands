@@ -1,0 +1,5 @@
+User and group Creation
+
+
+groupadd apache2
+useradd -d /home/apache -m -g apache -s /usr/local/bin/bash apache
