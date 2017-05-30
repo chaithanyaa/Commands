@@ -1,0 +1,10 @@
+
+Replacing script for paths 
+
+
+
+for file in `find . -name "*.*" -exec grep -il "/usr/local/apache2" {} \;`
+do
+sed 's_/usr/local/apache2_/home/apache_g' $file  > /tmp/temp1.txt
+mv /tmp/temp1.txt $file
+done
