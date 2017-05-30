@@ -1,0 +1,87 @@
+
+For renamaing the Mounts in the Linux OS
+
+1) Login as a root user.
+
+2) create a folder with following name.(If this folder does not exist).
+
+mkdir -p /u01
+
+3) go to /etc/fstab.
+
+there will be entry related to /rac. Just replace with /u01. Save and exit.
+
+4) unmount /rac using below command.
+
+umount /rac
+
+5) mount /u01 using below command.
+
+mount /u01
+
+Now check weather new mount point point has been reflected or not.
+
+before change:-
+
+[root@lstgiamdb1 ~]# df -kh
+Filesystem Size Used Avail Use% Mounted on
+/dev/mapper/vg_root-lv_root           5.9G            2.3G           3.3G            42% /
+/dev/mapper/vg_root-lv_home        4.9G           146M          4.5G              4% /home
+/dev/mapper/vg_root-lv_var             5.9G           242M          5.3G              5% /var
+/dev/mapper/vg_root-lv_tmp            7.8G           147M          7.3G              2% /tmp
+/dev/mapper/mpath0p2                      479M             22M         433M             5% /boot
+tmpfs                                                                  20G                    0            20G             0% /dev/shm
+
+/dev/mapper/vg_root-lv_rac     20G          15G        4.2G       78% /rac
+/dev/mapper/vg_data-lv_oracle         7.9G          147M           7.4G            2% /db/oracle/112/db
+/dev/mapper/vg_data-lv_grid              7.9G          147M           7.4G            2% /db/oracle/112/grid
+/rac/rhel-server-5.8-x86_64-dvd.iso 3.9G            3.9G               0          100% /media/cdrom
+[root@lstgiamdb1 ~]#
+
+after change:-
+
+[root@lstgiamdb1 u01]# df -kh
+Filesystem Size Used Avail Use% Mounted on
+/dev/mapper/vg_root-lv_root      5.9G          2.3G  3.3G 42% /
+/dev/mapper/vg_root-lv_home   4.9G         146M 4.5G 4%   /home
+/dev/mapper/vg_root-lv_var        5.9G          242M 5.3G 5%   /var
+/dev/mapper/vg_root-lv_tmp       7.8G          147M 7.3G 2%   /tmp
+/dev/mapper/mpath0p2                 479M            22M 433M 5% /boot
+tmpfs                                                             20G                   0 20G 0%    /dev/shm
+/dev/mapper/vg_data-lv_oracle   7.9G           4.7G 2.9G 62% /db/oracle/112/db
+/dev/mapper/vg_data-lv_grid        7.9G           6.2G 1.4G 83% /db/oracle/112/grid
+/rac/rhel-server-5.8-x86_64-dvd.iso 3.9G    3.9G     0 100% /media/cdrom
+/dev/mapper/vg_root-lv_rac 20G        4.1G 15G 22% /u01
+[root@lstgiamdb1 u01]#
+
+Issues:-
+
+1) while unmouting /rac you may face issue with below error.
+
+[root@abcgiamdb1 ~]# umount /rac
+
+umount: /rac: device is busy
+umount: /rac: device is busy
+[root@abcgiamdb1 ~]#
+
+Solution is :-
+
+Method 1:-
+
+find out the user who is assessing the /rac mount point and kill them and do the same.
+
+i) fuser -m /rac
+
+ii) Kill the user.
+
+iii) umount /rac
+
+This is recommended method.
+
+Method 2:-
+
+use below forcible option to unmount /rac
+
+umount /rac -l
+
+I used method-2 because, i could not find the any process using “fuser -m /rac”.
