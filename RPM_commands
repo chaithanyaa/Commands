@@ -1,0 +1,33 @@
+RPM Installation in Linux
+
+
+Installation of a Package 
+
+
+rpm -ivh pidgin-2.7.9-5.el6.2.i686.rpm
+rpm -ivh --nodeps idgin-2.7.9-5.el6.2.i686.rpm
+
+-i : install a package
+-v : verbose for a nicer display
+-h: print hash marks as the package archive is unpacked.
+--nodeps : no dependencies check
+
+Checking lasting installed Packages
+
+rpm -qa --last
+
+Checking particular package installed
+
+rpm -qa | grep pcre
+
+Removing a package without dependencies
+
+ rpm -e pcre-7.8-6.el6.x86_64 --nodeps
+
+Removing a package completely
+
+rpm -e pcre-7.8-6.el6.x86_64
+
+Quering information of a package
+
+rpm -qi vsftpd
