@@ -1,0 +1,61 @@
+What is hostname
+
+Hostname is human readable identity of server. Any server is identified by IP address in network but to identify easily hostname is also given. Normally FQDN (Fully Qualified Domain Name) is expected for system but even Domain name (name before dot) is also fine for systems under private networks. Hostname can be alpha-numeric
+
+
+
+Generally hostname standards to maximum of 255 bytes long. But normally people prefer to keep it 10-12 characters long so that its easy to remember. Kernel variables _POSIX_HOST_NAME_MAX or HOST_NAME_MAX defines your current max limit of hostname. You can get their values using getconf command like below :
+
+Shell
+
+
+# getconf HOST_NAME_MAX
+64
+
+ 
+How to set hostname
+
+Hostname is defined in files
+
+/etc/hosts for networking
+/etc/hostname : This will be read by boot scripts on boot time and set its value.
+/proc/sys/kernel/hostname : Current hostname.
+/etc/sysconfig/network : Networking (HOSTNAME=”server1″ parameter)
+In above files you can only view current hostname (being used by live kernel) under proc file only. Rest all files are used to lookup or set hostname at boot time. So if you change hostname using hostname command then it wont reflect in rest files. It will only reflect in proc file.
+
+You can set hostname of your choice in /etc/hostname or /etc/sysconfig/network and restart network service to notify kernel about it.
+
+How to change hostname
+
+Current hostname can be checked by typing hostname command without any argument. Hostname can be changed by simply using hostname command followed by name of your choice.
+
+Cautions : Do not change hostname on live production systems!
+
+Shell
+
+
+# hostname
+qwerty
+
+# hostname asdfg
+
+# hostname
+asdfg
+
+ 
+Please make a note that change is dynamic and not permanent. After system reboot, hostname will be return to what it was earlier.
+
+Change hostname permanently
+
+On RedHat systems : You can edit file /etc/sysconfig/network (define in HOSTNAME=”xyz”)  & reboot system
+
+On Debian systems : You can edit file /etc/hostname & call /etc/init.d/hostname.sh script (/etc/init.d/hostname.sh start)
+
+You can even change hostname using system control command. Use parameter kernel.hostname and define its value like below :
+
+Shell
+
+
+# sysctl kernel.hostname=asdfg
+kernel.hostname = asdfg
+
