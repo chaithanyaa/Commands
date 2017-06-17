@@ -1,4 +1,9 @@
 
+search for the pattern ".Legacy..xml" through the content of all files which ends with'`".java"` and lists them.
+
+find . -name "*.java" -print0 | xargs -0 grep -i ".*Legacy.*xml"
+
+
 
 
 find . -name "*.*" -exec grep -il "SMSSender.class" {} \;
@@ -9,3 +14,17 @@ ps -eo pmem,pcpu,pid,user,args | sort -k 1 -r | head -10
 
 
 
+ls -l | grep ^d -----------Literally it means "starts with", so ^d is "starts with d"
+
+
+
+In computing, a shebang is the character sequence consisting of the characters number sign and exclamation mark (#!) at the beginning of a script. It is also called sha-bang,[1][2] hashbang,[3][4] pound-bang,[5] or hash-pling.[6]
+
+Under Unix-like operating systems, when a script with a shebang is run as a program, the program loader parses the rest of the script's initial line as an interpreter directive; the specified interpreter program is run instead, passing to it as an argument the path that was initially used when attempting to run the script.[7] For example, if a script is named with the path path/to/script, and it starts with the following line:
+
+#!/bin/sh
+
+
+awk '{print $1}' your_file --- first word in every line of file
+
+awk '{print $NF}' abc ---- last word in every line of file
