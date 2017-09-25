@@ -1,0 +1,3 @@
+
+
+sed -n '/21\/Sep\/2017 ,p' ssl_access_log > /opt/sample.txt
