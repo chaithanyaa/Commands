@@ -1,0 +1,5 @@
+for file in `find . -name "*.*" -exec grep -il "10.196.215.34" {} \;`
+do
+sed 's/10.196.215.34/10.196.219.31/g' $file  > /tmp/temp1.txt
+mv /tmp/temp1.txt $file
+done
