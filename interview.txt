@@ -75,3 +75,11 @@ $ touch tecadmin.net.txt
 $ ls -l tecadmin.net.txt
 -rw-rw-r-- 1 tecadmin root 0 Mar  8 03:13 tecadmin.net.txt
 In above example tecadmin.net.txt is created with root group ownership.
+
+
+
+
+
+netstat -tulpn | grep 8080
+
+
